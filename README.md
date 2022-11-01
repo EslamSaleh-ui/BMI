@@ -1,7 +1,6 @@
-BMI
-Flutter project to calculate fit weight for your body
+# bmi_app
 
-using Flutter _ Getx.
+A new Flutter project.
 
 ## Getting Started
 
