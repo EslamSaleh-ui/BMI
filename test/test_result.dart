@@ -22,5 +22,10 @@ testWidgets('ok main page', (tester) async{
     expect(find.text('Healthy weight'), findsOneWidget);
     expect(find.text('4'), findsOneWidget);
     expect(find.byType(MyHomePage), findsNothing);
-  });
+    await tester.tap(find.byIcon(Icons.replay));
+    await tester.pumpAndSettle(Duration(seconds: 3));
+    expect(controllor.Age.value,0.0);
+    expect(controllor.Height.value,0.0);
+    expect(controllor.Weight.value,0.0);
+});
 }
