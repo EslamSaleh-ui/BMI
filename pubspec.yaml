@@ -52,17 +52,15 @@ dependencies:
 
 dev_dependencies:
   flutter_launcher_icons:
-  flutter_launcher_name:
   flutter_test:
     sdk: flutter
-flutter_launcher_name:
-  name: "BMI"
 flutter_icons:
   image_path: 'assets/icon/ic_launcher.png'
   ios: true
   android: true
   adaptive_icon_background: '#ffffff'
   adaptive_icon_foreground: 'assets/icon/ic_launcher.png'
+
 
   # The "flutter_lints" package below contains a set of recommended lints to
   # encourage good coding practices. The lint set provided by the package is

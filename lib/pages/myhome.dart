@@ -10,20 +10,17 @@ import 'package:nice_buttons/nice_buttons.dart';
 import 'package:share/share.dart';
 import 'package:toast/toast.dart';
 
-class MyHomePage extends StatefulWidget {
-  const MyHomePage({Key key}) : super(key: key);
-  @override
-  State<MyHomePage> createState() => _MyHomePageState();
-}
-
-class _MyHomePageState extends State<MyHomePage> {
+// ignore: must_be_immutable
+class MyHomePage extends StatelessWidget {
   List<String> kind=['Male','Female'];
   final controllor =Get.put(controller());
+  final GlobalKey<ScaffoldState> _scaffoldkey = new GlobalKey<ScaffoldState>();
 
   @override
   Widget build(BuildContext context) {
     ToastContext().init(context);
     return Scaffold(
+      key: _scaffoldkey,
       appBar: AppBar(
         flexibleSpace: Container(
           decoration: BoxDecoration(color:Colors.pink ),),
