@@ -8,7 +8,6 @@ import 'package:screenshot/screenshot.dart';
 import 'package:share/share.dart';
 
 
-List<String> setting=['Rate app','Share app','Help center'];
 
 class First extends StatefulWidget {
   final double Result1;

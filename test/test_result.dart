@@ -21,10 +21,9 @@ testWidgets('ok main page', (tester) async{
     expect(find.byType(PrettyGauge), findsOneWidget);
     expect(find.text(controllor.Result.value.toStringAsFixed(2)), findsOneWidget);
     await tester.tap(find.byIcon(Icons.replay));
-    await tester.pumpAndSettle();
+    await tester.pump();
     expect(controllor.Age.value,0.0);
     expect(controllor.Height.value,0.0);
     expect(controllor.Weight.value,0.0);
-
 });
 }

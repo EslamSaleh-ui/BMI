@@ -3,6 +3,7 @@ import 'package:bmi_app/controller/controller.dart';
 import 'package:bmi_app/methods/methods.dart';
 import 'package:bmi_app/pages/first.dart';
 import 'package:counter_button/counter_button.dart';
+import 'package:bmi_app/widgets/raw.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_3d_choice_chip/flutter_3d_choice_chip.dart';
 import 'package:get/get.dart';
@@ -13,14 +14,14 @@ import 'package:toast/toast.dart';
 // ignore: must_be_immutable
 class MyHomePage extends StatelessWidget {
   List<String> kind=['Male','Female'];
+  List<String> setting=['Rate app','Share app','Help center'];
+  List<Icon> icons=[Icon(Icons.rate_review_outlined),Icon(Icons.share),Icon(Icons.help_center)];
   final controllor =Get.put(controller());
-  final GlobalKey<ScaffoldState> _scaffoldkey = new GlobalKey<ScaffoldState>();
 
   @override
   Widget build(BuildContext context) {
     ToastContext().init(context);
     return Scaffold(
-      key: _scaffoldkey,
       appBar: AppBar(
         flexibleSpace: Container(
           decoration: BoxDecoration(color:Colors.pink ),),
@@ -39,7 +40,7 @@ class MyHomePage extends StatelessWidget {
           }),
           PopupMenuButton(itemBuilder: (_){
             return setting.map((e) {
-              return PopupMenuItem(child: Text(e),onTap: (){
+              return PopupMenuItem(child: raw(text: Text(e),icon:icons.elementAt(setting.indexOf(e)) ),onTap: (){
                 switch (setting.indexOf(e))
                 {
                   case 0:
