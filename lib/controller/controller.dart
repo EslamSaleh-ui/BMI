@@ -6,6 +6,7 @@ class controller extends GetxController{
   RxDouble Weight=0.0.obs;
   RxDouble Age=0.0.obs;
   RxDouble Result=0.0.obs;
+  final choice=0.obs;
   final Kind_2=''.obs;
   final yes=false.obs;
 

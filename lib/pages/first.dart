@@ -47,13 +47,13 @@ class _First extends State<First> {
               },tooltip:'share'.tr , icon:Icon(Icons.share,color:Colors.black))
             ]) ,
       body:SingleChildScrollView(child:Column(children: [
-        Divider(),
+        Divider(color: Colors.transparent),
         Row(mainAxisAlignment:MainAxisAlignment.spaceAround ,
           children: [Text('${'Age'.tr}\n ${widget.Result2.toInt().toString()}',style:TextStyle(fontSize:25,fontWeight:FontWeight.w900)),
             Text('${'2'.tr}\n ${widget.Result3.tr}',style:TextStyle(fontSize:25,fontWeight:FontWeight.w900)), ]),
-        Divider(),
+        Divider(color: Colors.transparent),
         Center(child:Text('your'.tr,style: TextStyle(fontSize:30))),
-        Divider(),
+        Divider(color: Colors.transparent),
         PrettyGauge(
           gaugeSize: 300,
           minValue:0 ,
@@ -70,9 +70,9 @@ class _First extends State<First> {
           currentValue:widget.Result1,
           displayWidget: Text(widget.Result1.toStringAsFixed(2), style: TextStyle(fontSize:30)),
         ),
-        Divider(),
+        Divider(color: Colors.transparent),
         Text(controllor.Score_express(widget.Result1).tr,style: TextStyle(fontSize:30)),
-        Divider(),
+        Divider(color: Colors.transparent),
           Text(controllor.advise(controllor. Score_express(widget.Result1)),style: TextStyle(fontSize:18)),
         Text('your health'.tr+':'+controllor.health_range(controllor.Height.value,18.5,25.0).elementAt(0).toStringAsFixed(0)+'-'+
             controllor.health_range(controllor.Height.value,18.5,25.0).elementAt(1).toStringAsFixed(0)+' '+'KG'.tr

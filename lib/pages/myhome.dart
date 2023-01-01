@@ -15,8 +15,8 @@ import 'package:toast/toast.dart';
 class MyHomePage extends StatelessWidget {
   List<String> kind=['Male','Female'];
   List<String> setting=['Rate app','Share app','Help center'];
-  List<Icon> icons=[Icon(Icons.rate_review_outlined),Icon(Icons.share),Icon(Icons.help_center)];
-  final controllor =Get.put(controller());
+  List<IconData> icons=[Icons.rate_review_outlined,Icons.share,Icons.help_center];
+  final Controller =Get.put( controller());
 
   @override
   Widget build(BuildContext context) {
@@ -40,7 +40,7 @@ class MyHomePage extends StatelessWidget {
           }),
           PopupMenuButton(itemBuilder: (_){
             return setting.map((e) {
-              return PopupMenuItem(child: raw(text: Text(e),icon:icons.elementAt(setting.indexOf(e)) ),onTap: (){
+              return PopupMenuItem(child: raw(text: Text(e),icon:Icon(icons.elementAt(setting.indexOf(e)) ,color: Colors.blueGrey)),onTap: (){
                 switch (setting.indexOf(e))
                 {
                   case 0:
@@ -66,13 +66,14 @@ class MyHomePage extends StatelessWidget {
             Divider(color: Colors.transparent),
             Row(mainAxisAlignment:MainAxisAlignment.spaceAround ,
                 children:kind.map((e) {
-                  return ChoiceChip3D(
+                  final choice=false.obs;
+                  return Obx(() => ChoiceChip3D(
                     height:120 ,
                     width: 150,
-                    style: ChoiceChip3DStyle.white, // ChoiceChip3DStyle.red, ChoiceChip3DStyle.white
-                    selected: false,
-                    onSelected: () {controllor.Kind_2.value=e;},
-                    onUnSelected: () {},
+                    style: ChoiceChip3DStyle.white,
+                    selected: choice.value,
+                    onSelected: () {Controller.Kind_2.value=e;choice.value=true;},
+                    onUnSelected: () {choice.value=false;Controller.Kind_2.value='';},
                     child:Center(child:Column(children:[
                       Container(height:70 ,width: 200,
                           decoration:BoxDecoration(image:
@@ -80,7 +81,7 @@ class MyHomePage extends StatelessWidget {
                           AssetImage(e=='Male'?'assets/image/male.png':'assets/image/female.png') ))) ,
                       Text(e.tr,style:TextStyle(fontSize: 20,color:Colors.black ) ,)
                     ])),
-                  );
+                  ));
                 }).toList()
             ) ,
             Divider(height:20,color: Colors.transparent),
@@ -91,8 +92,8 @@ class MyHomePage extends StatelessWidget {
                     Divider(color: Colors.transparent),
                     Obx(()=> CounterButton(
                       loading: false,
-                      onChange: (int val) {controllor.Weight.value = val.toDouble();},
-                      count:controllor.Weight.value.toInt() ,
+                      onChange: (int val) {Controller.Weight.value = val.toDouble();},
+                      count:Controller.Weight.value.toInt() ,
                       buttonColor: Colors.purpleAccent,
                     ))]), SizedBox(width: 10,),
                   Column(children:[
@@ -100,14 +101,14 @@ class MyHomePage extends StatelessWidget {
                     Divider(color: Colors.transparent),
                     Obx(()=>CounterButton(
                       loading: false,
-                      onChange: (int val) {controllor.Age.value = val.toDouble();},
-                      count:controllor.Age.value.toInt() ,
+                      onChange: (int val) {Controller.Age.value = val.toDouble();},
+                      count:Controller.Age.value.toInt() ,
                       buttonColor: Colors.purpleAccent,
                     ))])
                 ]),Divider(color: Colors.transparent),
             Center(child:Column(children: [Text('Height'.tr,style:TextStyle(fontSize: 20 ) ),
-              Obx(()=>Text(controllor.Height.value.toStringAsFixed(2)+' m',style: TextStyle(fontSize: 20 )))],)),
-            Obx(()=> Slider(max:3.0,min: 0.0 ,value:controllor.Height.value, onChanged:(v){controllor.Height.value=v;},activeColor:Colors.blue) ),
+              Obx(()=>Text(Controller.Height.value.toStringAsFixed(2)+' m',style: TextStyle(fontSize: 20 )))],)),
+            Obx(()=> Slider(max:3.0,min: 0.0 ,value:Controller.Height.value, onChanged:(v){Controller.Height.value=v;},activeColor:Colors.blue) ),
           ],
         ),
       ),floatingActionButtonLocation:FloatingActionButtonLocation.centerFloat ,
@@ -120,15 +121,15 @@ class MyHomePage extends StatelessWidget {
         gradientOrientation: GradientOrientation.Horizontal,
         onTap: (finish) {
           load();
-          if(controllor.Height.value>0 && controllor.Kind_2.value!='' && controllor.Age.value>10 && controllor.Weight.value>25 )
-          {controllor.calculateBmi();
-          Get.to(()=>First(Result1:controllor. Result.value,Result2:controllor.Age.value ,Result3:controllor.Kind_2.value));
+          if(Controller.Height.value>0 && Controller.Kind_2.value!='' && Controller.Age.value>10 && Controller.Weight.value>25 )
+          {Controller.calculateBmi();
+          Get.to(()=>First(Result1:Controller. Result.value,Result2:Controller.Age.value ,Result3:Controller.Kind_2.value));
           }
-          else if(controllor.Kind_2.value=='')
+          else if(Controller.Kind_2.value=='')
             Toast.show('1'.tr,duration:Toast.lengthLong,gravity: Toast.bottom );
-          else if( controllor.Age.value<10)
+          else if( Controller.Age.value<10)
             Toast.show('error3'.tr,duration:Toast.lengthLong,gravity: Toast.bottom );
-          else if(controllor.Weight.value<25 )
+          else if(Controller.Weight.value<25 )
             Toast.show('error2'.tr,duration:Toast.lengthLong,gravity: Toast.bottom );
           else
             Toast.show('Please Enter your Height'.tr,duration:Toast.lengthLong,gravity: Toast.bottom );
