@@ -7,8 +7,6 @@ import 'package:pretty_gauge/pretty_gauge.dart';
 import 'package:screenshot/screenshot.dart';
 import 'package:share/share.dart';
 
-
-
 class First extends StatefulWidget {
   final double Result1;
   final double Result2;
@@ -19,7 +17,8 @@ class First extends StatefulWidget {
 }
 class _First extends State<First> {
   ScreenshotController screenshotController = ScreenshotController();
-  final controllor =Get.put(controller());
+  controller controllor =Get.find();
+
   @override
   Widget build(BuildContext context) {
     return

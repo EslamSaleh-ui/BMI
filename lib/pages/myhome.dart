@@ -1,65 +1,25 @@
-import 'dart:io';
 import 'package:bmi_app/controller/controller.dart';
 import 'package:bmi_app/methods/methods.dart';
 import 'package:bmi_app/pages/first.dart';
 import 'package:counter_button/counter_button.dart';
-import 'package:bmi_app/widgets/raw.dart';
+import 'package:bmi_app/widgets/app_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_3d_choice_chip/flutter_3d_choice_chip.dart';
 import 'package:get/get.dart';
 import 'package:nice_buttons/nice_buttons.dart';
-import 'package:share/share.dart';
 import 'package:toast/toast.dart';
 
 // ignore: must_be_immutable
 class MyHomePage extends StatelessWidget {
   List<String> kind=['Male','Female'];
-  List<String> setting=['Rate app','Share app','Help center'];
-  List<IconData> icons=[Icons.rate_review_outlined,Icons.share,Icons.help_center];
-  final Controller =Get.put( controller());
-
+  final  Controllers =Get.lazyPut(()=>controller());
+  controller Controller=Get.find();
   @override
   Widget build(BuildContext context) {
     ToastContext().init(context);
     return Scaffold(
-      appBar: AppBar(
-        flexibleSpace: Container(
-          decoration: BoxDecoration(color:Colors.pink ),),
-        title: Text('Add'.tr),
-        actions: [IconButton(onPressed:(){
-          if(Get.locale==Locale('en'))
-            Get.updateLocale(Locale('ar'));
-          else
-            Get.updateLocale(Locale('en'));
-        },tooltip:Get.locale==Locale('en')?'ENG':'ع' , icon:Icon(Icons.language,color:Colors.black)),
-          IconButton(icon:Icon(Icons.dark_mode,color:  Colors.black),onPressed: (){
-            Get.changeTheme(ThemeData.dark());
-          }),
-          IconButton(icon:Icon(Icons.brightness_1_rounded,color:Colors.yellow),onPressed: (){
-            Get.changeTheme(ThemeData.light());
-          }),
-          PopupMenuButton(itemBuilder: (_){
-            return setting.map((e) {
-              return PopupMenuItem(child: raw(text: Text(e),icon:Icon(icons.elementAt(setting.indexOf(e)) ,color: Colors.blueGrey)),onTap: (){
-                switch (setting.indexOf(e))
-                {
-                  case 0:
-                    rate(context);
-                    break;
-                  case 1:
-                    Share.share(Platform.isAndroid?"https://play.google.com/store/apps/details?id=${'com.example.bmi_app'}":"https://apps.apple.com/app/id${' com.example.bmiApp'}");
-                    break;
-                  case 2:
-                    help();
-                    break;
-                  default:
-                    break;
-                }
-              });
-            }).toList();
-          })
-        ],
-      ),
+      appBar:PreferredSize(preferredSize: Size.fromHeight(50),
+      child:app_bar() ),
       body: SingleChildScrollView(
         child: Column(
           children: <Widget>[
@@ -123,7 +83,7 @@ class MyHomePage extends StatelessWidget {
           load();
           if(Controller.Height.value>0 && Controller.Kind_2.value!='' && Controller.Age.value>10 && Controller.Weight.value>25 )
           {Controller.calculateBmi();
-          Get.to(()=>First(Result1:Controller. Result.value,Result2:Controller.Age.value ,Result3:Controller.Kind_2.value));
+          Get.to(()=>First(Result1:Controller. Result.value,Result2:Controller.Age.value ,Result3:Controller.Kind_2.value),transition: Transition.zoom,duration: Duration(seconds: 1));
           }
           else if(Controller.Kind_2.value=='')
             Toast.show('1'.tr,duration:Toast.lengthLong,gravity: Toast.bottom );

@@ -2,7 +2,7 @@ import 'package:get/get.dart';
 
 class controller extends GetxController{
 
-  RxDouble Height=1.5.obs;
+  final Height=1.5.obs;
   RxDouble Weight=0.0.obs;
   RxDouble Age=0.0.obs;
   RxDouble Result=0.0.obs;
