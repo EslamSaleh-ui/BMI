@@ -1,6 +1,12 @@
 # bmi_app
 
-A new Flutter project.
+- Getx state management
+
+- screenshot
+
+- clean and testable code
+
+- responsive size
 
 ## Getting Started
 
